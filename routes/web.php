@@ -19,4 +19,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/create', 'DogController@index')->name('dogcreate');
+Route::get('/create', 'DogController@create')->name('dogcreate');

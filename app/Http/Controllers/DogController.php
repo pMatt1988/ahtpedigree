@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\r;
+use App\Dog;
 use Illuminate\Http\Request;
 
 class DogController extends Controller
@@ -41,10 +41,10 @@ class DogController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\r  $r
+     * @param  \App\Dog  $dog
      * @return \Illuminate\Http\Response
      */
-    public function show(r $r)
+    public function show(Dog $dog)
     {
         //
     }
@@ -52,10 +52,10 @@ class DogController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\r  $r
+     * @param  \App\Dog  $dog
      * @return \Illuminate\Http\Response
      */
-    public function edit(r $r)
+    public function edit(Dog $dog)
     {
         //
     }
@@ -64,10 +64,10 @@ class DogController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\r  $r
+     * @param  \App\Dog  $dog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, r $r)
+    public function update(Request $request, Dog $dog)
     {
         //
     }
@@ -75,10 +75,10 @@ class DogController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\r  $r
+     * @param  \App\Dog  $dog
      * @return \Illuminate\Http\Response
      */
-    public function destroy(r $r)
+    public function destroy(Dog $dog)
     {
         //
     }
