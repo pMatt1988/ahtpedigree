@@ -13,12 +13,13 @@ class CreateDogsTable extends Migration
      */
     public function up()
     {
+
         Schema::create('dogs', function (Blueprint $table) {
             $table->increments('id');
 
             $table->text('regname');
             $table->text('sire')->nullable();
-            $table->text('damn')->nullable();
+            $table->text('dam')->nullable();
 
             $table->timestamps();
         });

@@ -19,4 +19,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/create', 'DogController@create')->name('dogcreate');
+Route::post('/store', 'DogController@store');
+Route::delete('/dog/{id}', 'DogController@destroy');
+Route::get('/dog/{id}', 'DogController@show');
