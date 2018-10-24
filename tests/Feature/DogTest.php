@@ -13,6 +13,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 class DogTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * A basic test example.
      *
@@ -31,7 +32,8 @@ class DogTest extends TestCase
     /**
      * Test whether or not a guest can create a dog entry.
      */
-    public function testGuestShouldNotBeAbleToCreateDogEntry(){
+    public function testGuestShouldNotBeAbleToCreateDogEntry()
+    {
         $this->withoutExceptionHandling();
         $this->post('/store', [
             'regname' => 'A Test Regname',
@@ -44,7 +46,8 @@ class DogTest extends TestCase
         ]);
     }
 
-    public function testAuthenticatedUserShouldBeAbleToCreateDogEntry() {
+    public function testAuthenticatedUserShouldBeAbleToCreateDogEntry()
+    {
         $user = factory(User::class)->create();
         $this->actingAs($user);
 
@@ -59,7 +62,8 @@ class DogTest extends TestCase
         ]);
     }
 
-    public function testAuthenticatedUserShouldBeAbleToDeleteDogEntry() {
+    public function testAuthenticatedUserShouldBeAbleToDeleteDogEntry()
+    {
         $this->withoutExceptionHandling();
 
         $user = factory(User::class)->create();
@@ -69,28 +73,39 @@ class DogTest extends TestCase
 
         $this->delete('/dog/' . $dog->id)->assertRedirect('/dog');
         $this->assertDatabaseMissing('dogs', [
-            'id'=> $dog->id
+            'id' => $dog->id
         ]);
     }
 
-    public function testGuestShouldNotBeAbleToDeleteDogEntry() {
+    public function testGuestShouldNotBeAbleToDeleteDogEntry()
+    {
         $dog = factory(Dog::class)->create();
 
         $this->delete('/dog/' . $dog->id)
             ->assertRedirect('/login');
         $this->assertDatabaseHas('dogs', [
-            'id'=> $dog->id
+            'id' => $dog->id
         ]);
     }
 
-    public function testGuestShouldBeAbleToViewDogEntryById() {
+    public function testGuestShouldBeAbleToViewDogEntryById()
+    {
         $dog = factory(Dog::class)->create();
         $this->get('/dog/' . $dog->id)
             ->assertStatus(200)
             ->assertSee($dog->regname);
     }
 
-    public function testAuthenticatedUserShouldBeAbleToEditDogEntry() {
+    public function testAuthenticatedUserShouldBeAbleToEditDogEntry()
+    {
+        $user = factory(User::class)->create();
+        $this->actingAs($user);
 
+
+        $dog = factory(Dog::class)->create();
+        $this->patch('/dog/' . $dog->id, [
+            'regname' => 'TestDog'
+        ])->assertRedirect("/dog/{$dog->id}");
+        $this->assertDatabaseHas('dogs', ['regname' => 'TestDog']);
     }
 }

@@ -22,3 +22,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/store', 'DogController@store');
 Route::delete('/dog/{id}', 'DogController@destroy');
 Route::get('/dog/{id}', 'DogController@show');
+Route::patch('/dog/{id}', 'DogController@update');

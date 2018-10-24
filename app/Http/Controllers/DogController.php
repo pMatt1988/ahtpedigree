@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Dog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class DogController extends Controller
 {
@@ -74,12 +75,22 @@ class DogController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Dog $dog
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dog $dog)
+    public function update($id)
     {
-        //
+        if(Auth::check()) {
+
+            $dog = Dog::find($id);
+            $dog->update(request()->all());
+
+
+            return redirect("/dog/$id");
+        }
+        else {
+            return redirect('/login');
+        }
     }
 
     /**
